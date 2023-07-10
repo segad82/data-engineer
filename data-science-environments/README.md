@@ -63,3 +63,51 @@ Para clonar un ambiente, escribir:
 
 Para eliminar un ambiente, escribir:
 > conda env remove --name <ambiente>
+
+Comando avanzados de conda.
+
+Al tratar de instalar paquetes que no están disponibles en los canales de anaconda (ej. bolton), se debe buscar el canal en www.anaconda.org.
+Una vez identificado el canal se debe instalar de la siguiente manera.
+
+> conda install --channel <canal> <paquete>
+
+Conda registra un histórico de revisiones y cada revisión hacer referencia a la instalación de uno o más paquetes.
+Para listar las revisiones, se hace de la siguiente manera:
+> conda list --revision
+
+Para regresar a un punto de revisión, escribir:
+> conda install --revision <número de revisión>
+
+Otro de los grandes beneficios de trabajar con Conda es que se puede compartir con otros los entornos para asegurar la correcta ejecución de proyectos.
+Para exportar un entorno con sus dependencias específicas, escribir:
+> conda env export
+
+Para exportar un entorno con el nombre y versión de sus dependencias, escribir:
+> conda env export --no-builds
+
+Para exportar un entorno con la lista de dependencias que se han instalado manualmente, escribir:
+> conda env export --from-history
+
+Para exportar un entorno a un archivo, escribir:
+> conda env export --file enviroment.yml
+
+Para importar un entorno, escribir:
+> conda env create --file enviroment.yml
+
+Al tratar de importar ambientes con muchas dependencias, esto puede tardar mucho tiempo, es por esto que existe una herramienta llamada Mamba la cual permite al igual que Conda, manimular ambientes distribuyendo los proceso en paralelo.
+Cómo instalar Mamba?
+> conda install --channel conda-forge mamba
+
+Al importar nuevamente el ambiente pero con Mamba, lo hará en menos tiempo por la distribución de sus procesos en paralelo:
+> mamba env create --file enviroment.yml
+
+Una recomendación que podría evitar dolores de cabeza es crear 3 ambientes de trabajo por cada proyecto.
+
+project/
+    data/
+    model/
+    notebook/
+    envs/
+        external.yml
+        model.yml
+        comunication.yml
